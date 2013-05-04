@@ -35,7 +35,7 @@
 				$sessionid = time().":".$userid.":".md5(rand()).":".md5($_SERVER['REMOTE_ADDR']);
 				$hash = md5($_SERVER['REMOTE_ADDR']);
 				mysql_query("INSERT INTO sessions (userid, sessionid) values ('".$userid."', '".$sessionid."', '".$hash."')") or die(mysql_error());
-				$_SESSION['id'] = md5($sessionid);
+				$_SESSION['sessionid'] = md5($sessionid);
 				$_SESSION['hash'] = md5($hash);
 				$return .= "Success";
 			}
