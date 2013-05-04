@@ -1,4 +1,9 @@
 <?php
+	function db_connect(){
+		mysql_connect (db_host, db_user, db_pass);
+		mysql_select_db (db_name);
+	}
+
 	function regUser($login, $pass, $email){
 		if(empty($login) && preg_match("/^\w{3,}$/", $login)) $return .= "Login required";
 		elseif(empty($pass) && preg_match("/\A(\w){6,20}\Z/", $pass)) $return .= "Password required";
