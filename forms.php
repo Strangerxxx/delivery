@@ -18,14 +18,14 @@
 		<input type="password" name="pass" placeholder="Your password...">
 		<input type="email" name="email" placeholder="Your email...">
 		<input type="hidden" name="request" value="reg">
-		<input type="submit" value="Proceed">
+		<input type="submit" value="Proceed" name="submit">
 	</form>
 
 	<form action="request.php" method="POST">
 		<input type="text" name="login" placeholder="Your login...">
 		<input type="password" name="pass" placeholder="Your password...">
 		<input type="hidden" name="request" value="login">
-		<input type="submit" value="Proceed">
+		<input type="submit" value="Proceed" name="submit">
 	</form>
 	<?php
 	else:
