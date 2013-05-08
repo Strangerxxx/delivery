@@ -3,6 +3,22 @@
 	include_once('functions.php');
 	db_connect();
 	session_start();
+
+		if(isset($_POST['submit'])){
+		switch ($_POST['request']) {
+		case 'reg':
+			echo regUser($_POST['login'], $_POST['pass'], $_POST['email']);
+			break;
+	
+		case 'login':
+			echo loginUser($_POST['login'], $_POST['pass']);
+			break;
+		
+		case 'logout':
+			session_destroy();
+			break;
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +29,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	</head>
 <?php if((isset($_SESSION['sessionid']) && isset($_SESSION['hash'])) && (!$userid = checkUserLogin($_SESSION['sessionid'], $_SESSION['hash']))): ?>
-	<form action="request.php" method="POST">
+	<form method="POST">
 		<input type="text" name="login" placeholder="Your login...">
 		<input type="password" name="pass" placeholder="Your password...">
 		<input type="email" name="email" placeholder="Your email...">
@@ -21,7 +37,7 @@
 		<input type="submit" value="Proceed" name="submit">
 	</form>
 
-	<form action="request.php" method="POST">
+	<form method="POST">
 		<input type="text" name="login" placeholder="Your login...">
 		<input type="password" name="pass" placeholder="Your password...">
 		<input type="hidden" name="request" value="login">
@@ -31,7 +47,7 @@
 	else:
 	?>
 	<p>UserID:</p><?=$userid?>
-	<form action="request.php" method="POST">
+	<form method="POST">
 		<input type="hidden" name="request" value="logout">
 		<input type="submit" value="Logout" name="submit">
 	</form>
