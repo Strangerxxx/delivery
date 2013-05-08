@@ -29,9 +29,9 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	</head>
 <?php 
-	if( (isset($_SESSION['sessionid']) && isset($_SESSION['hash'])) ):
+	if(isset($_SESSION['sessionid'])){
 		$userid = checkUserLogin($_SESSION['sessionid']);
-		if (!$userid): ?>
+		if (!$userid){ ?>
 	<form method="POST">
 		<input type="text" name="login" placeholder="Your login...">
 		<input type="password" name="pass" placeholder="Your password...">
@@ -47,12 +47,12 @@
 		<input type="submit" value="Proceed" name="submit">
 	</form>
 	<?php
-	else:
+	} else{
 	?>
 	<p>UserID:</p><?=$userid?>
 	<form method="POST">
 		<input type="hidden" name="request" value="logout">
 		<input type="submit" value="Logout" name="submit">
 	</form>
-	<?php endif; endif; ?>
+	<?php } ?>>
 </html>
