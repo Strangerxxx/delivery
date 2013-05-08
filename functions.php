@@ -31,6 +31,7 @@
 			echo $pass;
 			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND password='".$pass."'"));
 			$userid = $row['id'];
+			print_r($row);
 			if(empty($userid)) $return .= "Pair of login/pass does not exist";
 			else{
 				$ip = $_SERVER['REMOTE_ADDR'];
