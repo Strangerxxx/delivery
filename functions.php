@@ -32,26 +32,22 @@
 			$userid = $row[0];
 			if(empty($userid)) $return .= "Pair of login/pass does not exist";
 			else{
-				$sessionid = time().":".$userid.":".md5(rand()).":".md5($_SERVER['REMOTE_ADDR']);
-				$hash = md5($_SERVER['REMOTE_ADDR']);
-				mysql_query("INSERT INTO sessions (userid, sessionid, hash) values ('".$userid."', '".$sessionid."', '".$hash."')") or die(mysql_error());
+				$ip = $_SERVER['REMOTE_ADDR'];
+				$sessionid = md5($userid).md5($ip);
+				mysql_query("INSERT INTO sessions (userid, sessionid, ip) values ('".$userid."', '".$sessionid."', '".$ip."')") or die(mysql_error());
 				$_SESSION['sessionid'] = md5($sessionid);
-				$_SESSION['hash'] = md5($hash);
 				$return .= "Success";
 			}
 		}
 		return $return;
 	}
-	function checkUserLogin($sessionid, $userhash){
-		$userhash = md5($_SERVER['REMOTE_ADDR']);
-		if($userhash == $hash){
-			$sql = mysql_query("SELECT * FROM sessions WHERE sessionid = '".$sessionid."', hash = '".$hash."'") or die(mysql_error());
-			if(mysql_num_rows($row) == 0) return false;
-			else {
-				$rows = mysql_fetch_array($sql);
-				return $rows['userid'];
-			}
+	function checkUserLogin($sessionid){
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$sql = mysql_query("SELECT * FROM sessions WHERE sessionid = '".$sessionid."', ip = '".$ip."'") or die(mysql_error());
+		if(mysql_num_rows($row) == 0) return false;
+		else {
+			$rows = mysql_fetch_array($sql);
+			return $rows['userid'];
 		}
-
 	}
 ?>
