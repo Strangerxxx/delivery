@@ -31,5 +31,9 @@
 	else:
 	?>
 	<p>UserID:</p><?=$userid?>
+	<form action="request.php" method="POST">
+		<input type="hidden" name="request" value="logout">
+		<input type="submit" value="Logout" name="submit">
+	</form>
 	<?php endif; ?>
 </html>

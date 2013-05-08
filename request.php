@@ -13,5 +13,8 @@
 			echo loginUser($_POST['login'], $_POST['pass']);
 			break;
 		}
+		case 'logout':
+			session_destroy();
+			break;
 	}
 ?>
