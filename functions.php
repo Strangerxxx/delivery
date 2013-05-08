@@ -28,8 +28,8 @@
 		else{
 			$login = mysql_real_escape_string(trim($login));
 			$pass = md5(mysql_real_escape_string(trim($pass)));
-			$row = mysql_fetch_row(mysql_query("SELECT id FROM users WHERE login='".$login."' AND password='".$pass."'"));
-			$userid = $row[0];
+			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND password='".$pass."'"));
+			$userid = $row['id'];
 			if(empty($userid)) $return .= "Pair of login/pass does not exist";
 			else{
 				$ip = $_SERVER['REMOTE_ADDR'];
