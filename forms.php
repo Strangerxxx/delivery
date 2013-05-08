@@ -54,5 +54,5 @@
 		<input type="hidden" name="request" value="logout">
 		<input type="submit" value="Logout" name="submit">
 	</form>
-	<?php } ?>
+	<?php } } ?>
 </html>
