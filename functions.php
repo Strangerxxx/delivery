@@ -27,12 +27,9 @@
 		elseif(empty($pass) && preg_match("/\A(\w){6,20}\Z/", $pass)) $return .= "Password required";
 		else{
 			$login = mysql_real_escape_string(trim($login));
-			echo $pass."\n";
 			$pass = md5(trim($pass));
-			echo $pass."\n";
 			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND pass='".$pass."'"));
 			$userid = $row['id'];
-			print_r($row);
 			if(empty($userid)) $return .= "Pair of login/pass does not exist";
 			else{
 				$ip = $_SERVER['REMOTE_ADDR'];

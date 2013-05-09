@@ -47,6 +47,7 @@
 	</form>
 	<?php
 	} else{
+		echo $_SESSION['sessionid'];
 		$userid = checkUserLogin($_SESSION['sessionid']);
 	?>
 	<p>UserID:</p><?=$userid?>
