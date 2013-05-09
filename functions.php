@@ -23,6 +23,7 @@
 	}
 
 	function loginUser($login, $pass){
+		$return = "";
 		if(empty($login) && preg_match("/^\w{3,}$/", $login)) $return .= "Login required";
 		elseif(empty($pass) && preg_match("/\A(\w){6,20}\Z/", $pass)) $return .= "Password required";
 		else{
