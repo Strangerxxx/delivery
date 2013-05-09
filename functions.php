@@ -27,14 +27,14 @@
 		elseif(empty($pass) && preg_match("/\A(\w){6,20}\Z/", $pass)) $return .= "Password required";
 		else{
 			$login = mysql_real_escape_string(trim($login));
-			$pass = md5(trim($pass));
+			$pass = md5(mysql_real_escape_string(trim($pass)));
 			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND pass='".$pass."'"));
 			$userid = $row['id'];
 			if(empty($userid)) $return .= "Pair of login/pass does not exist";
 			else{
 				$ip = $_SERVER['REMOTE_ADDR'];
-				$sessionid = md5(md5($userid).md5($ip));
-				mysql_query("INSERT INTO sessions (userid, sessionid, ip) values ('".$userid."', '".$sessionid."', '".mysql_real_escape_string($ip)."')") or die(mysql_error());
+				$sessionid = md5(md5(rand()).md5($userid).md5($ip));
+				mysql_query("INSERT INTO sessions (userid, sessionid, ip) values ('".$userid."', '".$sessionid."', '".$ip."')") or die(mysql_error());
 				$_SESSION['sessionid'] = $sessionid;
 				$return .= "Success";
 			}
@@ -42,8 +42,9 @@
 		return $return;
 	}
 	function checkUserLogin($sessionid){
+		$sessionid = mysql_real_escape_string(trim($sessionid));
 		$ip = $_SERVER['REMOTE_ADDR'];
-		$sql = mysql_query("SELECT * FROM sessions WHERE sessionid = '".$sessionid."' AND ip = '".mysql_real_escape_string($ip)."'") or die(mysql_error());
+		$sql = mysql_query("SELECT * FROM sessions WHERE sessionid = '".$sessionid."' AND ip = '".$ip."'") or die(mysql_error());
 		if(mysql_num_rows($sql) == 0) return false;
 		else {
 			$rows = mysql_fetch_array($sql);

@@ -47,10 +47,9 @@
 	</form>
 	<?php
 	} else{
-		echo $_SESSION['sessionid'];
 		$userid = checkUserLogin($_SESSION['sessionid']);
 	?>
-	<p>UserID:</p><?=$userid?>
+	<p>UserID:<?=$userid?></p>
 	<form method="POST">
 		<input type="hidden" name="request" value="logout">
 		<input type="submit" value="Logout" name="submit">
