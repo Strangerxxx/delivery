@@ -27,7 +27,7 @@
 		elseif(empty($pass) && preg_match("/\A(\w){6,20}\Z/", $pass)) $return .= "Password required";
 		else{
 			$login = mysql_real_escape_string(trim($login));
-			$pass = md5(mysql_real_escape_string(trim($pass)));
+			$pass = md5(trim($pass));
 			echo $pass;
 			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND password='".$pass."'"));
 			$userid = $row['id'];
