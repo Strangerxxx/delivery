@@ -47,7 +47,7 @@
 	function checkUserLogin($sessionid){
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$sql = mysql_query("SELECT * FROM sessions WHERE sessionid = '".$sessionid."' AND ip = '".mysql_real_escape_string($ip)."'") or die(mysql_error());
-		if(mysql_num_rows($row) == 0) return false;
+		if(mysql_num_rows($sql) == 0) return false;
 		else {
 			$rows = mysql_fetch_array($sql);
 			return $rows['userid'];
