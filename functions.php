@@ -29,7 +29,7 @@
 			$login = mysql_real_escape_string(trim($login));
 			$pass = md5(trim($pass));
 			echo $pass;
-			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND password='".$pass."'"));
+			$row = mysql_fetch_array(mysql_query("SELECT id FROM users WHERE login='".$login."' AND pass='".$pass."'"));
 			$userid = $row['id'];
 			print_r($row);
 			if(empty($userid)) $return .= "Pair of login/pass does not exist";
