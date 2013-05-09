@@ -30,7 +30,7 @@
 	</head>
 <?php 
 	if(isset($_SESSION['sessionid'])) $userid = checkUserLogin($_SESSION['sessionid']);
-	if(!isset($_SESSION['sessionid']) && $userid == false){
+	if(isset($_SESSION['sessionid']) && $userid == false){
 		?>
 	<form method="POST">
 		<input type="text" name="login" placeholder="Your login...">
