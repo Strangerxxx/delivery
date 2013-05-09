@@ -35,7 +35,7 @@
 				$ip = $_SERVER['REMOTE_ADDR'];
 				$sessionid = md5(md5(rand()).md5($userid).md5($ip));
 				mysql_query("INSERT INTO sessions (userid, sessionid, ip) values ('".$userid."', '".$sessionid."', '".$ip."')") or die(mysql_error());
-				$_SESSION['sessionid'] = $sessionid;
+				setcookie("sessionid", $sessionid, time()+3600);
 				$return .= "Success";
 			}
 		}
