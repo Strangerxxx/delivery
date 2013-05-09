@@ -28,9 +28,8 @@
 		<title>Main</title>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	</head>
-<?php 
-	if(isset($_SESSION['sessionid'])) $userid = checkUserLogin($_SESSION['sessionid']);
-	if(isset($_SESSION['sessionid']) && $userid == false){
+<?php
+	if(!isset($_SESSION['sessionid'])){
 		?>
 	<form method="POST">
 		<input type="text" name="login" placeholder="Your login...">
@@ -48,6 +47,7 @@
 	</form>
 	<?php
 	} else{
+		$userid = checkUserLogin($_SESSION['sessionid']);
 	?>
 	<p>UserID:</p><?=$userid?>
 	<form method="POST">
